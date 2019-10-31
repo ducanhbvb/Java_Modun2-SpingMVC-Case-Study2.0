@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<h3>Modify Customer</h3>
+<p>
+    <a th:href="@{/employee/}">
+        Back to customer list
+    </a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<div id="form">
+    <form action="#" th:action="@{/employee/edit-employee}" th:object="${employeeForm}"
+          method="POST" novalidate="novalidate" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>BirthDate</label>
+            <input type="text" th:field="*{birthDate}"/>
+        </div>
+        <div>
+            <label>Address</label>
+            <input type="text" th:field="*{address}"/>
+        </div>
+        <div>
+            <td><label>Avatar</label></td>
+        </div>
+            <td><img width="150px" height="150px" th:src="@{'/i/' + ${employeeForm.getAvatar()}}"></td>
+        <div>
+        </div>
+        <div>
+             <label>Fix Avatar</label>
+        </div>
+        <div>
+            <input type="file" th:field="*{avatar}"/>
+        </div>
+        <div>
+            <label>Salary</label>
+            <input type="text" th:field="*{salary}"/>
+        </div>
+<!--        <div>-->
+<!--            <label>Department</label>-->
+<!--            <td th:text="${departments[id].getName()}"></td>-->
+<!--        </div>-->
+        <div>
+            <label>fix Department</label>
+                    <select name="department">
+                        <option th:each="d : ${departments}"
+                                th:value="${d.id}"
+                                th:text="${d.name}"
+                                th:selected="(${d.id} == *{department.id})"></option>
+                    </select>
+
+
+        </div>
+        <input type="submit" value="Save">
+    </form>
+</div>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

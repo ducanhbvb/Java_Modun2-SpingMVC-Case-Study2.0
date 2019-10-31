@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<meta charset="UTF-8">
+<h3>Department</h3>
+<p>
+    <a th:href="@{/employee/}">
+        Home Employee
+    </a>
+</p>
+<p>
+    <a th:href="@{/department/create-department}">
+        Add new Department
+    </a>
+</p>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id = "customers">
+    <thead>
+    <tr><th>ID</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${departments}">
+        <td th:text="${rowStat.count}"></td>
+        <td th:text="${row.getName()}"></td>
+        <td><a th:href="@{/department/edit-department/{id}(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/department/delete/{id}(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/department/view/{id}(id=${row.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

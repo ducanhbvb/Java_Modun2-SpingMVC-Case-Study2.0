@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<h3>Department</h3>
+<h1>View province: <span th:text="${department.name}"></span></h1>
+<a href="/provinces">Province list</a>
+<p>
+    <a th:href="@{/employee/}">
+        Home employee
+    </a>
+</p>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>Stt</th>
+        <th>Name</th>
+        <th>BirthDate</th>
+        <th>Address</th>
+        <th>Avatar</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${employees}">
+        <td th:text="${rowStat.count}"></td>
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getBirthDate()}"></td>
+        <td th:text="${row.getAddress()}"></td>
+        <td><img width="400px" height="400px" th:src="@{'/i/' + ${row.avatar}}"></td>
+        <td th:text="${row.getSalary()}"></td>
+        <td th:text="${row.getDepartment().getName()}"></td>
+        <td><a th:href="@{/employee/edit-employee/{id}(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/employee/delete-employee/{id}(id=${row.getId()})}">delete</a></td>
+    </tr>
+
+    </tbody>
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
